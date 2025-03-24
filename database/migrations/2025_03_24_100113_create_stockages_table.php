@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('stockages', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->enum('Sous-catégories', ['Disque dur portable','Disque dur interne','Clé USB', 'Carte mémoire']);
+            $table->enum('Sous-catégories', ['Disque_dur_portable','Disque_dur_interne','Clé_USB', 'Carte_mémoire']);
             $table->string('name');
             $table->string('Marque');
             $table->decimal('Prix', 10, 2);
-            $table->integer('Quantité en stock');
+            $table->integer('Quantité_en_stock');
             $table->string('Description');
             $table->string('Image');
             $table->timestamps();

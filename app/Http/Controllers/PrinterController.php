@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Printer;
@@ -19,11 +18,27 @@ class PrinterController extends Controller
 {
     try {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'processor' => 'required|string|max:255',
-            'ram' => 'required|integer|min:1',
-            'storage' => 'required|string|max:255',
+            'type'=> 'required|string|max:255',
+            'name'=> 'required|string|max:255',
+            'Marque'=> 'required|string|max:100',
+            'Fonctions'=> '',
+            'Cartouches_impression'=> '',
+            'Vitesse_impression_noir'=> '',
+            'Vitesse_impression_couleur'=> '',
+            'Qualité_impression_noire'=> '',
+            'Qualité_impression_couleur'=> '',
+            'Écran'=> '',
+            'Connectivité'=> '',
+            'Impression_recto/verso'=> '',
+            'Capacité_bac_papier'=> '',
+            'Dimensions'=> 'required|string|max:255',
+            'Poids'=> 'required|integer|min:1',
+            'Photocopieur'=>  'required|in:OUI, NON',
+            'Câble_fourni'=>  'required|in:OUI, NON',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
         ]);
 
         Printer::create($validatedData);

@@ -6,29 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('monitors', function (Blueprint $table) {
             $table->id();
             $table->string('type');
             $table->string('name');
-            $table->string('Taille écran');
-            $table->string('Surface active');
+            $table->string('Taille_écran');
+            $table->string('Surface_active');
             $table->string('Luminosité');
             $table->string('Résolution');
-            $table->integer('Temps de réponse');
+            $table->integer('Temps_de_réponse');
             $table->string('Connectivité');
             $table->string('Dimensions');
             $table->integer('Poids');
-            $table->string('Consommation normale');
+            $table->string('Consommation_normale');
             $table->string('Description');
-            $table->string('Courbure écran');
+            $table->string('Courbure_écran');
             $table->string('Marque');
             $table->decimal('Prix', 10, 2);
-            $table->integer('Quantité en stock');
+            $table->integer('Quantité_en_stock');
             $table->string('Image');
             $table->timestamps();
         });

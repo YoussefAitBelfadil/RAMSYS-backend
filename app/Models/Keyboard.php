@@ -6,6 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Keyboard extends Model
 {
-    protected $fillable = ['name', 'price', 'processor', 'ram', 'storage'];
-
+    protected $fillable = ['name',
+            'type',
+            'Marque',
+            'Norme_du_clavier',
+            'Liaison',
+            'Poids',
+            'Clavier_rétroéclairé',
+            'Clavier_numérique',
+            'Prix',
+            'Quantité_en_stock',
+            'Description',
+            'Image',
+];
 }

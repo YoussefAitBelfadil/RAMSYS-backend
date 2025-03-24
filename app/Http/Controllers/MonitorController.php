@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Monitor;
@@ -19,11 +18,23 @@ class MonitorController extends Controller
 {
     try {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'processor' => 'required|string|max:255',
-            'ram' => 'required|integer|min:1',
-            'storage' => 'required|string|max:255',
+            'type'=> 'required|string|max:255',
+            'name'=> 'required|string|max:255',
+            'Taille_écran'=> 'required|string|max:255',
+            'Surface_active'=> 'required|string|max:255',
+            'Luminosité'=> 'required|string|max:255',
+            'Résolution'=> 'required|string|max:255',
+            'Temps_de_réponse'=> 'required|numeric',
+            'Connectivité'=> 'required|string|max:255',
+            'Dimensions'=> 'required|string|max:255',
+            'Poids'=> 'required|numeric',
+            'Consommation_normale'=> 'required|string|max:255',
+            'Courbure_écran'=> 'required|string|max:255',
+            'Marque'=> 'required|string|max:255',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
         ]);
 
         Monitor::create($validatedData);

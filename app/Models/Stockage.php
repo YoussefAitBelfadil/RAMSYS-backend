@@ -1,11 +1,18 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Stockage extends Model
 {
-    protected $fillable = ['name', 'price', 'processor', 'ram', 'storage'];
+    protected $fillable = ['type',
+            'Sous-catégories',
+            'name',
+            'Marque',
+            'Prix',
+            'Quantité_en_stock',
+            'Description',
+            'Image'
+        ];
 
 }

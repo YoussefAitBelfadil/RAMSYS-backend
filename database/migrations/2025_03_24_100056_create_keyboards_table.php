@@ -16,22 +16,20 @@ return new class extends Migration
             $table->string('type');
             $table->string('name');
             $table->string('Marque');
-            $table->string('Norme du clavier');
-            $table->enum('Liaison', ['Avec fil', 'Sans fil']);
+            $table->string('Norme_du_clavier');
+            $table->enum('Liaison', ['Avec_fil', 'Sans_fil']);
             $table->integer('Poids');
-            $table->enum('Clavier rétroéclairé', ['OUI', 'NON']);
-            $table->enum('Clavier numérique', ['OUI', 'NON']);
+            $table->enum('Clavier_rétroéclairé', ['OUI', 'NON']);
+            $table->enum('Clavier_numérique', ['OUI', 'NON']);
             $table->decimal('Prix', 10, 2);
-            $table->integer('Quantité en stock');
+            $table->integer('Quantité_en_stock');
             $table->string('Description');
             $table->string('Image');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('keyboards');

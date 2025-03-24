@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('printers', function (Blueprint $table) {
@@ -17,21 +14,21 @@ return new class extends Migration
             $table->string('name');
             $table->string('Marque');
             $table->string('Fonctions');
-            $table->integer('Cartouches impression');
-            $table->string('Vitesse impression noir');
-            $table->string('Vitesse impression couleur');
-            $table->integer('Qualité impression noire');
-            $table->string('Qualité impression couleur');
+            $table->string('Cartouches_impression');
+            $table->string('Vitesse_impression_noir');
+            $table->string('Vitesse_impression_couleur');
+            $table->string('Qualité_impression_noire');
+            $table->string('Qualité_impression_couleur');
             $table->string('Écran');
             $table->string('Connectivité');
-            $table->string('Impression recto/verso');
-            $table->string('Capacité bac papier');
+            $table->string('Impression_recto/verso');
+            $table->string('Capacité_bac_papier');
             $table->string('Dimensions');
             $table->integer('Poids');
             $table->enum('Photocopieur', ['OUI', 'NON']);
-            $table->enum('Câble fourni', ['OUI', 'NON']);
+            $table->enum('Câble_fourni', ['OUI', 'NON']);
             $table->decimal('Prix', 10, 2);
-            $table->integer('Quantité en stock');
+            $table->integer('Quantité_en_stock');
             $table->string('Description');
             $table->string('Image');
             $table->timestamps();

@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('mice', function (Blueprint $table) {
@@ -16,9 +14,9 @@ return new class extends Migration
             $table->string('type');
             $table->string('name');
             $table->string('Marque');
-            $table->enum('Liaison', ['Avec fil', 'Sans fil']);
+            $table->enum('Liaison', ['Avec_fil', 'Sans_fil']);
             $table->decimal('Prix', 10, 2);
-            $table->integer('Quantité en stock');
+            $table->integer('Quantité_en_stock');
             $table->string('Description');
             $table->string('Image');
             $table->timestamps();

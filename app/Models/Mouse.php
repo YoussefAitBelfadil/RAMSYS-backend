@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Mouse extends Model
 {
-    protected $fillable = ['name', 'price', 'processor', 'ram', 'storage'];
-
+    protected $fillable = ['type','name','Sous-catégories','Marque','Liaison',
+    'Prix','Quantité_en_stock','Description','Image'];
 }

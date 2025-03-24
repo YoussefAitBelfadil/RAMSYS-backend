@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Stockage;
@@ -19,11 +18,14 @@ class StockageController extends Controller
 {
     try {
         $validatedData = $request->validate([
+            'type'=> 'required|string|max:255',
+            'Sous-catégories'=>  'required|in:Disque_dur_portable,Disque_dur_interne,Clé_USB, Carte_mémoire',
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'processor' => 'required|string|max:255',
-            'ram' => 'required|integer|min:1',
-            'storage' => 'required|string|max:255',
+            'Marque'=> 'required|string|max:255',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
         ]);
 
         Stockage::create($validatedData);

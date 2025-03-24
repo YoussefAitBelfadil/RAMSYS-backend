@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('tablettes', function (Blueprint $table) {
@@ -16,22 +14,22 @@ return new class extends Migration
             $table->string('type');
             $table->string('name');
             $table->string('Marque');
-            $table->string('Taille de la tablette');
-            $table->string('Surface active');
+            $table->string('Taille_de_la_tablette');
+            $table->string('Surface_active');
             $table->string('Touches/Bouton');
-            $table->string('Niveaux de pression');
+            $table->string('Niveaux_de_pression');
             $table->string('Connectivité');
             $table->integer('Poids');
             $table->string('Résolution');
             $table->string('Stylet');
-            $table->string('Vitesse de lecture');
-            $table->string('Câble fourni');
+            $table->string('Vitesse_de_lecture');
+            $table->string('Câble_fourni');
             $table->string('Batterie');
-            $table->string('Durée de fonctionnement');
+            $table->string('Durée_de_fonctionnement');
             $table->string('Ergonomie');
-            $table->string('Saisie multi-touch');
+            $table->string('Saisie_multi-touch');
             $table->decimal('Prix', 10, 2);
-            $table->integer('Quantité en stock');
+            $table->integer('Quantité_en_stock');
             $table->string('Description');
             $table->string('Image');
             $table->timestamps();

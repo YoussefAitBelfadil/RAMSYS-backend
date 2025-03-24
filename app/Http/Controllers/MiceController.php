@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Mouse;
@@ -19,11 +18,15 @@ class MiceController extends Controller
 {
     try {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'processor' => 'required|string|max:255',
-            'ram' => 'required|integer|min:1',
-            'storage' => 'required|string|max:255',
+            'type'=> 'required|string|max:255',
+            'name'=> 'required|string|max:255',
+            'Sous-catégories'=>  'required|in:PC_portable,PC_portable, PC_de_bureau',
+            'Marque'=> 'required|string|max:100',
+            'Liaison'=> 'required|in:Avec_fil,Sans_fil',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
         ]);
 
         Mouse::create($validatedData);

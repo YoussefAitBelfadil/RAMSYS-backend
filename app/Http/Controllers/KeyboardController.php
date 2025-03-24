@@ -21,10 +21,17 @@ class KeyboardController extends Controller
     try {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'processor' => 'required|string|max:255',
-            'ram' => 'required|integer|min:1',
-            'storage' => 'required|string|max:255',
+            'type'=> 'required|string|max:255',
+            'Marque'=> 'required|string|max:255',
+            'Norme_du_clavier'=> 'required|string|max:255',
+            'Liaison'=> 'required|in:Avec_fil,Sans_fil',
+            'Poids'=> 'required|integer|min:1',
+            'Clavier_rétroéclairé'=> 'required|in:OUI, NON',
+            'Clavier_numérique'=> 'required|in:OUI, NON',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
         ]);
 
         Keyboard::create($validatedData);
