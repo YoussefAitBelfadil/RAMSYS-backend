@@ -39,6 +39,13 @@ Route::get('/form/{type}', function ($type) {
     return "<p class='text-center text-danger'>Formulaire introuvable</p>";
 });
 
+Route::get('/per/{type}', function ($type) {
+    if (View::exists("components.forms.form" . $type)) {
+        return view("components.forms.form" . $type);
+    }
+    return "<p class='text-center text-danger'>Formulaire introuvable</p>";
+});
+
 Route::get('/forms/{type}', [FormController::class, 'getForm']);
 
 
