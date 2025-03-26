@@ -22,7 +22,7 @@ class Laptop extends Model
                             'Prix',
                             'Quantité_en_stock',
                             'Description',
-                            'Image',
-                            'storage'];
+                            'Image'
+                            ];
 
 }
