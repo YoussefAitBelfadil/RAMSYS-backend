@@ -1,5 +1,44 @@
 @extends('layouts.Master')
 
+@if (session('success'))
+    <!-- Modal Bootstrap -->
+    <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" style="display: block;">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Succès</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ session('success') }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (session('success'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                var successModal = new bootstrap.Modal(document.getElementById("successModal"));
+                successModal.show();
+            }, 500); // Délai pour éviter un affichage immédiat
+        });
+    </script>
+@endif
+
+@if ($errors->any())
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            alert("Erreur de validation : vérifiez vos champs !");
+        });
+    </script>
+@endif
+@endif
+
+
+
+
 @section('main')
 <div style="height:100%;">
     <div class="row">

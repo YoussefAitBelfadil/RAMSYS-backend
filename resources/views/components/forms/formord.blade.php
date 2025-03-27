@@ -10,6 +10,7 @@
                 <input type="text" name="name" class="form-control" placeholder="Titre" required>
             </div>
 
+            <!-- -->
             <div class="col-md-4">
                 <select name="Sous_catégories" class="form-control" required>
                     <option value="" disabled selected hidden>Sous-catégorie</option>

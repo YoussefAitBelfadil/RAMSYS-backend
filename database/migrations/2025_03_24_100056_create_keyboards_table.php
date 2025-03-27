@@ -23,7 +23,7 @@ return new class extends Migration
             $table->enum('Clavier_numérique', ['OUI', 'NON']);
             $table->decimal('Prix', 10, 2);
             $table->integer('Quantité_en_stock');
-            $table->string('Description');
+            $table->text('Description');
             $table->string('Image');
             $table->timestamps();
         });

@@ -38,15 +38,45 @@ class TabletteController extends Controller
             'Prix'=> 'required|numeric',
             'Quantité_en_stock'=> 'required|integer|min:1',
             'Description'=> 'required|string|min:25',
-            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
-
-
-
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        Tablette::create($validatedData);
+        $imageUrl = null;
+        if ($request->hasFile('Image')) {
+            $image = $request->file('Image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-        return response()->json(['message' => 'Laptop added successfully'], 201);
+            $image->storeAs('public/images', $imageName);
+
+            $imageUrl = asset('storage/images/' . $imageName);
+        }
+
+
+        $tablette = Tablette::create([
+            "type"=> $request->input('type'),
+            'name' => $request->input('name'),
+            'Marque'=> $request->input("Marque"),
+            'Taille_de_la_tablette'=> $request->input("Taille_de_la_tablette"),
+            'Surface_active'=> $request->input('Surface_active'),
+            'Touches/Bouton'=> $request->input('Touches/Bouton'),
+            'Niveaux_de_pression'=> $request->input('Niveaux_de_pression'),
+            'Connectivité'=> $request->input('Connectivité'),
+            'Poids'=> $request->input('Poids'),
+            'Résolution'=> $request->input('Résolution'),
+            'Stylet'=> $request->input('Stylet'),
+            'Vitesse_de_lecture'=> $request->input('Vitesse_de_lecture'),
+            'Câble_fourni'=> $request->input('Câble_fourni'),
+            'Batterie'=> $request->input('Batterie'),
+            'Durée_de_fonctionnement'=> $request->input('Durée_de_fonctionnement'),
+            'Ergonomie'=> $request->input('Ergonomie'),
+            'Saisie_multi-touch'=> $request->input('Saisie_multi-touch'),
+            'Prix'=> $request->input('Prix'),
+            'Quantité_en_stock'=> $request->input('Quantité_en_stock'),
+            'Description'=> $request->input('Description'),
+            'Image'=> $imageUrl,
+        ]);
+
+        return redirect()->back()->with('success', 'Le produit a été ajouté avec succès.');
 
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
@@ -71,22 +101,44 @@ class TabletteController extends Controller
 
     public function show(string $id)
     {
-        $laptop = Tablette::findOrFail($id);
-        return response()->json($laptop);
+        $tablette = Tablette::findOrFail($id);
+        return response()->json($tablette);
     }
 
     public function update(Request $request, string $id)
     {
-        $laptop = Tablette::findOrFail($id);
+        $tablette = Tablette::findOrFail($id);
 
-        $request->validate([
-            'brand' => 'sometimes|string',
-            'model' => 'sometimes|string',
-            'price' => 'sometimes|numeric',
-            'specifications' => 'sometimes|string',
+        $validatedData = $request->validate([
+            "type"=> "required|string|max:255",
+            'name' => 'required|string|max:255',
+            'Marque'=> 'required|string|max:255',
+            'Taille_de_la_tablette'=> 'required|string|max:255',
+            'Surface_active'=> 'required|string|max:255',
+            'Touches/Bouton'=> 'required|string|max:255',
+            'Niveaux_de_pression'=> 'required|string|max:255',
+            'Connectivité'=> 'required|string|max:255',
+            'Poids'=> 'required|integer|min:1',
+            'Résolution'=> 'required|string|max:255',
+            'Stylet'=> 'required|string|max:255',
+            'Vitesse_de_lecture'=> 'required|string|max:255',
+            'Câble_fourni'=> 'required|string|max:255',
+            'Batterie'=> 'required|string|max:255',
+            'Durée_de_fonctionnement'=> 'required|string|max:255',
+            'Ergonomie'=> 'required|string|max:255',
+            'Saisie_multi-touch'=> 'required|string|max:255',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        $laptop->update($request->all());
-        return response()->json($laptop);
+        if ($request->hasFile('Image')) {
+            $imagePath = $request->file('Image')->store('laptops', 'public');
+            $validatedData['Image'] = $imagePath;
+        }
+
+        $tablette->update($validatedData);
+        return response()->json($tablette);
     }
 }

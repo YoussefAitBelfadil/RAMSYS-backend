@@ -7,6 +7,7 @@ use App\Models\Keyboard;
 use Exception;
 use Illuminate\Database\QueryException;
 
+
 class KeyboardController extends Controller
 {
     public function index()
@@ -26,17 +27,40 @@ class KeyboardController extends Controller
             'Norme_du_clavier'=> 'required|string|max:255',
             'Liaison'=> 'required|in:Avec_fil,Sans_fil',
             'Poids'=> 'required|integer|min:1',
-            'Clavier_rétroéclairé'=> 'required|in:OUI, NON',
-            'Clavier_numérique'=> 'required|in:OUI, NON',
+            'Clavier_rétroéclairé'=> 'required|in:OUI,NON',
+            'Clavier_numérique'=> 'required|in:OUI,NON',
             'Prix'=> 'required|numeric',
             'Quantité_en_stock'=> 'required|integer|min:1',
             'Description'=> 'required|string|min:25',
-            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        Keyboard::create($validatedData);
+        $imageUrl = null;
+        if ($request->hasFile('Image')) {
+            $image = $request->file('Image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-        return response()->json(['message' => 'Laptop added successfully'], 201);
+            $image->storeAs('public/images', $imageName);
+
+            $imageUrl = asset('storage/images/' . $imageName);
+        }
+
+        Keyboard::create([
+            'name' => $request->input('name'),
+            'type'=> $request->input('type'),
+            'Marque'=> $request->input('Marque'),
+            'Norme_du_clavier'=> $request->input('Norme_du_clavier'),
+            'Liaison'=> $request->input('Liaison'),
+            'Poids'=> $request->input('Poids'),
+            'Clavier_rétroéclairé'=> $request->input('Clavier_rétroéclairé'),
+            'Clavier_numérique'=> $request->input('Clavier_numérique'),
+            'Prix'=> $request->input('Prix'),
+            'Quantité_en_stock'=> $request->input('Quantité_en_stock'),
+            'Description'=> $request->input('Description'),
+            'Image'=> $imageUrl,
+        ]);
+
+        return redirect()->back()->with('success', 'Le produit a été ajouté avec succès.');
 
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
@@ -61,23 +85,36 @@ class KeyboardController extends Controller
 
     public function show(string $id)
     {
-        $laptop = Keyboard::findOrFail($id);
-        return response()->json($laptop);
+        $keyboard = Keyboard::findOrFail($id);
+        return response()->json($keyboard);
     }
 
     public function update(Request $request, string $id)
     {
-        $laptop = Keyboard::findOrFail($id);
+        $keyboard = Keyboard::findOrFail($id);
 
-        $request->validate([
-            'brand' => 'sometimes|string',
-            'model' => 'sometimes|string',
-            'price' => 'sometimes|numeric',
-            'specifications' => 'sometimes|string',
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'type'=> 'required|string|max:255',
+            'Marque'=> 'required|string|max:255',
+            'Norme_du_clavier'=> 'required|string|max:255',
+            'Liaison'=> 'required|in:Avec_fil,Sans_fil',
+            'Poids'=> 'required|integer|min:1',
+            'Clavier_rétroéclairé'=> 'required|in:OUI, NON',
+            'Clavier_numérique'=> 'required|in:OUI, NON',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        $laptop->update($request->all());
-        return response()->json($laptop);
+        if ($request->hasFile('Image')) {
+            $imagePath = $request->file('Image')->store('laptops', 'public');
+            $validatedData['Image'] = $imagePath;
+        }
+
+        $keyboard->update($validatedData);
+        return response()->json($keyboard);
     }
 }
 

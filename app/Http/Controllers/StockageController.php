@@ -9,8 +9,8 @@ class StockageController extends Controller
 {
     public function index()
     {
-        $laptops = Stockage::all();
-        return response()->json($laptops);
+        $stockages = Stockage::all();
+        return response()->json($stockages);
     }
 
 
@@ -19,18 +19,38 @@ class StockageController extends Controller
     try {
         $validatedData = $request->validate([
             'type'=> 'required|string|max:255',
-            'Sous-catégories'=>  'required|in:Disque_dur_portable,Disque_dur_interne,Clé_USB, Carte_mémoire',
+            'Sous-catégories'=>  'required|in:Disque_dur_portable,Disque_dur_interne,Clé_USB,Carte_mémoire',
             'name' => 'required|string|max:255',
             'Marque'=> 'required|string|max:255',
             'Prix'=> 'required|numeric',
             'Quantité_en_stock'=> 'required|integer|min:1',
             'Description'=> 'required|string|min:25',
-            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        Stockage::create($validatedData);
+        $imageUrl = null;
+        if ($request->hasFile('Image')) {
+            $image = $request->file('Image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-        return response()->json(['message' => 'Laptop added successfully'], 201);
+            $image->storeAs('public/images', $imageName);
+
+            $imageUrl = asset('storage/images/' . $imageName);
+        }
+
+        Stockage::create([
+            'type'=> $request->input('type'),
+            'Sous-catégories'=>  $request->input('Sous-catégories'),
+            'name' => $request->input('name'),
+            'Marque'=> $request->input('Marque'),
+            'Prix'=> $request->input('Prix'),
+            'Quantité_en_stock'=> $request->input('Quantité_en_stock'),
+            'Description'=> $request->input('Description'),
+            'Image'=> $imageUrl,
+        ]);
+
+        return redirect()->back()->with('success', 'Le produit a été ajouté avec succès.');
+
 
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
@@ -55,22 +75,26 @@ class StockageController extends Controller
 
     public function show(string $id)
     {
-        $laptop = Stockage::findOrFail($id);
-        return response()->json($laptop);
+        $stockages = Stockage::findOrFail($id);
+        return response()->json($stockages);
     }
 
     public function update(Request $request, string $id)
     {
-        $laptop = Stockage::findOrFail($id);
+        $stockages = Stockage::findOrFail($id);
 
-        $request->validate([
-            'brand' => 'sometimes|string',
-            'model' => 'sometimes|string',
-            'price' => 'sometimes|numeric',
-            'specifications' => 'sometimes|string',
+        $validatedData = $request->validate([
+            'type'=> 'required|string|max:255',
+            'Sous-catégories'=>  'required|in:Disque_dur_portable,Disque_dur_interne,Clé_USB,Carte_mémoire',
+            'name' => 'required|string|max:255',
+            'Marque'=> 'required|string|max:255',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        $laptop->update($request->all());
-        return response()->json($laptop);
+        $stockages->update($validatedData);
+        return response()->json($stockages);
     }
 }

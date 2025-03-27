@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('Liaison', ['Avec_fil', 'Sans_fil']);
             $table->decimal('Prix', 10, 2);
             $table->integer('Quantité_en_stock');
-            $table->string('Description');
+            $table->text('Description');
             $table->string('Image');
             $table->timestamps();
         });

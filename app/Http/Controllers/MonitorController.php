@@ -34,12 +34,40 @@ class MonitorController extends Controller
             'Prix'=> 'required|numeric',
             'Quantité_en_stock'=> 'required|integer|min:1',
             'Description'=> 'required|string|min:25',
-            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        Monitor::create($validatedData);
+        $imageUrl = null;
+        if ($request->hasFile('Image')) {
+            $image = $request->file('Image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-        return response()->json(['message' => 'Laptop added successfully'], 201);
+            $image->storeAs('public/images', $imageName);
+
+            $imageUrl = asset('storage/images/' . $imageName);
+        }
+
+        Monitor::create([
+            'type'=> $request->input('type'),
+            'name'=> $request->input('name'),
+            'Taille_écran'=> $request->input('Taille_écran'),
+            'Surface_active'=> $request->input('Surface_active'),
+            'Luminosité'=> $request->input('Luminosité'),
+            'Résolution'=> $request->input('Résolution'),
+            'Temps_de_réponse'=> $request->input('Temps_de_réponse'),
+            'Connectivité'=> $request->input('Connectivité'),
+            'Dimensions'=> $request->input('Dimensions'),
+            'Poids'=> $request->input('Poids'),
+            'Consommation_normale'=> $request->input('Consommation_normale'),
+            'Courbure_écran'=> $request->input('Courbure_écran'),
+            'Marque'=> $request->input('Marque'),
+            'Prix'=> $request->input('Prix'),
+            'Quantité_en_stock'=> $request->input('Quantité_en_stock'),
+            'Description'=> $request->input('Description'),
+            'Image'=> $imageUrl,
+        ]);
+
+        return redirect()->back()->with('success', 'Le produit a été ajouté avec succès.');
 
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
@@ -64,22 +92,35 @@ class MonitorController extends Controller
 
     public function show(string $id)
     {
-        $laptop = Monitor::findOrFail($id);
-        return response()->json($laptop);
+        $monitor = Monitor::findOrFail($id);
+        return response()->json($monitor);
     }
 
     public function update(Request $request, string $id)
     {
-        $laptop = Monitor::findOrFail($id);
+        $monitor = Monitor::findOrFail($id);
 
-        $request->validate([
-            'brand' => 'sometimes|string',
-            'model' => 'sometimes|string',
-            'price' => 'sometimes|numeric',
-            'specifications' => 'sometimes|string',
+        $validatedData = $request->validate([
+            'type'=> 'required|string|max:255',
+            'name'=> 'required|string|max:255',
+            'Taille_écran'=> 'required|string|max:255',
+            'Surface_active'=> 'required|string|max:255',
+            'Luminosité'=> 'required|string|max:255',
+            'Résolution'=> 'required|string|max:255',
+            'Temps_de_réponse'=> 'required|numeric',
+            'Connectivité'=> 'required|string|max:255',
+            'Dimensions'=> 'required|string|max:255',
+            'Poids'=> 'required|numeric',
+            'Consommation_normale'=> 'required|string|max:255',
+            'Courbure_écran'=> 'required|string|max:255',
+            'Marque'=> 'required|string|max:255',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        $laptop->update($request->all());
-        return response()->json($laptop);
+        $monitor->update($validatedData);
+        return response()->json($monitor);
     }
 }

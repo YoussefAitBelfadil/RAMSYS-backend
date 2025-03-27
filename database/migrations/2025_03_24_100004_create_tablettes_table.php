@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('Saisie_multi-touch');
             $table->decimal('Prix', 10, 2);
             $table->integer('Quantité_en_stock');
-            $table->string('Description');
+            $table->text('Description');
             $table->string('Image');
             $table->timestamps();
         });

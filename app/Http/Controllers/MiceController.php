@@ -20,18 +20,36 @@ class MiceController extends Controller
         $validatedData = $request->validate([
             'type'=> 'required|string|max:255',
             'name'=> 'required|string|max:255',
-            'Sous-catégories'=>  'required|in:PC_portable,PC_portable, PC_de_bureau',
             'Marque'=> 'required|string|max:100',
             'Liaison'=> 'required|in:Avec_fil,Sans_fil',
             'Prix'=> 'required|numeric',
             'Quantité_en_stock'=> 'required|integer|min:1',
             'Description'=> 'required|string|min:25',
-            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:8,192',
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        Mouse::create($validatedData);
+        $imageUrl = null;
+        if ($request->hasFile('Image')) {
+            $image = $request->file('Image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
 
-        return response()->json(['message' => 'Laptop added successfully'], 201);
+            $image->storeAs('public/images', $imageName);
+
+            $imageUrl = asset('storage/images/' . $imageName);
+        }
+
+        Mouse::create(attributes: [
+            'type'=> $request->input('type'),
+            'name'=> $request->input('name'),
+            'Marque'=> $request->input('Marque'),
+            'Liaison'=> $request->input('Liaison'),
+            'Prix'=> $request->input('Prix'),
+            'Quantité_en_stock'=> $request->input('Quantité_en_stock'),
+            'Description'=> $request->input('Description'),
+            'Image'=> $imageUrl,
+        ]);
+
+        return redirect()->back()->with('success', 'Le produit a été ajouté avec succès.');
 
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
@@ -56,22 +74,32 @@ class MiceController extends Controller
 
     public function show(string $id)
     {
-        $laptop = Mouse::findOrFail($id);
-        return response()->json($laptop);
+        $Mouse = Mouse::findOrFail($id);
+        return response()->json($Mouse);
     }
 
     public function update(Request $request, string $id)
     {
-        $laptop = Mouse::findOrFail($id);
+        $Mouse = Mouse::findOrFail($id);
 
-        $request->validate([
-            'brand' => 'sometimes|string',
-            'model' => 'sometimes|string',
-            'price' => 'sometimes|numeric',
-            'specifications' => 'sometimes|string',
+        $validatedData = $request->validate([
+            'type'=> 'required|string|max:255',
+            'name'=> 'required|string|max:255',
+            'Sous-catégories'=>  'required|in:PC_portable,PC_portable,PC_de_bureau',
+            'Marque'=> 'required|string|max:100',
+            'Liaison'=> 'required|in:Avec_fil,Sans_fil',
+            'Prix'=> 'required|numeric',
+            'Quantité_en_stock'=> 'required|integer|min:1',
+            'Description'=> 'required|string|min:25',
+            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        $laptop->update($request->all());
-        return response()->json($laptop);
+        if ($request->hasFile('Image')) {
+            $imagePath = $request->file('Image')->store('laptops', 'public');
+            $validatedData['Image'] = $imagePath;
+        }
+
+        $Mouse->update($validatedData);
+        return response()->json($Mouse);
     }
 }

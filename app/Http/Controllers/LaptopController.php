@@ -50,7 +50,8 @@ class LaptopController extends Controller
         }
 
 
-        $laptop = Laptop::create([
+
+        Laptop::create([
             'type' => $request->input('type'),
             'name' => $request->input('name'),
             'Sous_catégories' => $request->input('Sous_categorie'),
@@ -71,7 +72,7 @@ class LaptopController extends Controller
             'Image' => $imageUrl,
         ]);
 
-        return response()->json(['message' => 'Laptop added successfully'], 201);
+        return redirect()->back()->with('success', 'Le produit a été ajouté avec succès.');
 
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
@@ -123,7 +124,7 @@ class LaptopController extends Controller
         'Prix'=> 'required|numeric',
         'Quantité_en_stock'=> 'required|integer|min:1',
         'Description'=> 'required|string|min:25',
-        'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:8192',
+        'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
     ]);
 
     if ($request->hasFile('Image')) {

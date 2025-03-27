@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('Dimensions');
             $table->integer('Poids');
             $table->string('Consommation_normale');
-            $table->string('Description');
+            $table->text('Description');
             $table->string('Courbure_écran');
             $table->string('Marque');
             $table->decimal('Prix', 10, 2);

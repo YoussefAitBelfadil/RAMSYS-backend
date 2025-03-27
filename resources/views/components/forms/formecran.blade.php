@@ -1,56 +1,56 @@
-<form action="{{ route('ecran.store') }}" method="POST">
+<form action="{{ route('ecran.store') }}" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="row m-2 d-grid gap-1" style="grid-template-columns: repeat(3, 2fr); grid-gap: 10px;">
             <div class="p-2">
-                <input type="text" class="form-control" value="ECRAN" placeholder="ECRAN" readonly required>
+                <input type="text" class="form-control" name="type" value="ECRAN" placeholder="ECRAN" readonly required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="titre" placeholder="Titre" required>
+                <input type="text" class="form-control" name="name" placeholder="Titre" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="taille_ecran" placeholder="Taille de l'écran" required>
+                <input type="text" class="form-control" name='Taille_écran' placeholder="Taille de l'écran" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="surface_active" placeholder="Surface active" required>
+                <input type="text" class="form-control" name='Surface_active' placeholder="Surface active" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="luminosite" placeholder="Luminosité" required>
+                <input type="text" class="form-control" name='Luminosité' placeholder="Luminosité" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="resolution" placeholder="Résolution optimale" required>
+                <input type="text" class="form-control" name='Résolution' placeholder="Résolution optimale" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="temps_reponse" placeholder="Temps de réponse" required>
+                <input type="text" class="form-control" name='Temps_de_réponse' placeholder="Temps de réponse" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="connectivite" placeholder="Connectivité" required>
+                <input type="text" class="form-control" name='Connectivité' placeholder="Connectivité" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="dimensions" placeholder="Dimensions (l x p x h) en mm" required>
+                <input type="text" class="form-control" name="Dimensions" placeholder="Dimensions (l x p x h) en mm" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="poids" placeholder="Poids net en kg" required>
+                <input type="text" class="form-control" name="Poids" placeholder="Poids net en kg" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="consommation" placeholder="Consommation normale" required>
+                <input type="text" class="form-control" name='Consommation_normale' placeholder="Consommation normale" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="description" placeholder="Description" required>
+                <input type="text" class="form-control" name="Description" placeholder="Description" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="courbure" placeholder="Courbure de l'écran" required>
+                <input type="text" class="form-control" name='Courbure_écran' placeholder="Courbure de l'écran" required>
             </div>
             <div class="p-2">
-                <input type="text" class="form-control" name="marque" placeholder="Marque" required>
+                <input type="text" class="form-control" name="Marque" placeholder="Marque" required>
             </div>
             <div class="p-2">
-                <input type="number" class="form-control" name="prix" placeholder="Prix" required>
+                <input type="number" class="form-control" name="Prix" placeholder="Prix" required>
             </div>
             <div class="p-2">
-                <input type="number" class="form-control" name="quantite_stock" placeholder="Quantité en stock" required>
+                <input type="number" class="form-control" name='Quantité_en_stock' placeholder="Quantité en stock" required>
             </div>
             <div class="p-2">
-                <input type="file" class="form-control" name="image" required>
+                <input type="file" class="form-control" name="Image" required>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit form</button>
