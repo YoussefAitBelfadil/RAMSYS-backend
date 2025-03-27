@@ -27,6 +27,10 @@ return new class extends Migration
             $table->decimal('Prix', 10, 2);
             $table->integer('Quantité_en_stock');
             $table->string('Image');
+            $table->string('Image2');
+            $table->string('Image3');
+            $table->string('Image4');
+            $table->string('Image5');
             $table->timestamps();
         });
     }

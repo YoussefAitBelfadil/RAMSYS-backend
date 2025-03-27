@@ -20,7 +20,11 @@ class Monitor extends Model
                             'Prix',
                             'Quantité_en_stock',
                             'Description',
-                            'Image'
+                            'Image',
+                            'Image2',
+                            'Image3',
+                            'Image4',
+                            'Image5',
         ];
 
 }

@@ -80,6 +80,21 @@
                 <input type="file" name="Image" class="form-control" required>
             </div>
 
+            <div class="col-md-4">
+                <input type="file" id="Image2" name="Image2" class="form-control text-center" placeholder="Image" required>
+            </div>
+
+            <div class="col-md-4">
+                <input type="file" id="Image3" name="Image3" class="form-control text-center" placeholder="Image" required>
+            </div>
+
+            <div class="col-md-4">
+                <input type="file" id="Image4" name="Image4" class="form-control text-center" placeholder="Image" >
+
+            <div class="col-md-4">
+                <input type="file" id="Image5" name="Image5" class="form-control text-center" placeholder="Image" >
+            </div>
+
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Submit Form</button>
             </div>

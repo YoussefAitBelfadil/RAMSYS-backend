@@ -26,17 +26,24 @@ class MiceController extends Controller
             'Quantité_en_stock'=> 'required|integer|min:1',
             'Description'=> 'required|string|min:25',
             'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image2'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image3'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image4'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image5'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
-        $imageUrl = null;
-        if ($request->hasFile('Image')) {
-            $image = $request->file('Image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $imageUrls = [];
 
-            $image->storeAs('public/images', $imageName);
-
-            $imageUrl = asset('storage/images/' . $imageName);
-        }
+foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
+    $imageUrl = null;
+    if ($request->hasFile($imageField)) {
+        $image = $request->file($imageField);
+        $imageName = time() . '-' . $imageField . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('public/images', $imageName);
+        $imageUrl = asset('storage/images/' . $imageName);
+    }
+    $imageUrls[$imageField] = $imageUrl;
+}
 
         Mouse::create(attributes: [
             'type'=> $request->input('type'),
@@ -46,7 +53,11 @@ class MiceController extends Controller
             'Prix'=> $request->input('Prix'),
             'Quantité_en_stock'=> $request->input('Quantité_en_stock'),
             'Description'=> $request->input('Description'),
-            'Image'=> $imageUrl,
+            'Image'=> $imageUrls['Image'],
+            'Image2'=> $imageUrls['Image2'],
+            'Image3'=> $imageUrls['Image3'],
+            'Image4'=> $imageUrls['Image4'],
+            'Image5'=> $imageUrls['Image5'],
         ]);
 
         return redirect()->back()->with('success', 'Le produit a été ajouté avec succès.');

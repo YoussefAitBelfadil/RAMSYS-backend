@@ -31,6 +31,10 @@ return new class extends Migration
             $table->integer('Quantité_en_stock');
             $table->text('Description');
             $table->string('Image');
+            $table->string('Image2');
+            $table->string('Image3');
+            $table->string('Image4');
+            $table->string('Image5');
             $table->timestamps();
         });
     }

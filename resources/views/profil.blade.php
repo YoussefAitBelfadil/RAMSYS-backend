@@ -37,8 +37,6 @@
 @endif
 
 
-
-
 @section('main')
 <div style="height:100%;">
     <div class="row">
@@ -56,7 +54,7 @@
         <div class="col-sm-9" style="background-color:#f4f4f4;">
             <div class="tab-content">
                 <!-- Onglet Information -->
-                <div class="tab-pane fade show active" id="info">
+                <div class="tab-pane fade show active" id="info" >
                     @include('components.forms.form')
                 </div>
 

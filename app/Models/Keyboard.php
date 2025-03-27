@@ -18,5 +18,9 @@ class Keyboard extends Model
             'Quantité_en_stock',
             'Description',
             'Image',
+            'Image2',
+            'Image3',
+            'Image4',
+            'Image5',
 ];
 }

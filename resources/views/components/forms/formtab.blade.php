@@ -84,6 +84,27 @@
         <div class="p-2">
             <input required type="file" name="Image" class="form-control text-center">
         </div>
+
+        <div class="p-2">
+            <input type="file" id="Image2" name="Image2" class="form-control text-center" placeholder="Image" required>
+            <span class="text-danger error-message" id="error-Image"></span>
+        </div>
+
+        <div class="p-2">
+            <input type="file" id="Image3" name="Image3" class="form-control text-center" placeholder="Image" required>
+            <span class="text-danger error-message" id="error-Image"></span>
+        </div>
+
+        <div class="p-2">
+            <input type="file" id="Image4" name="Image4" class="form-control text-center" placeholder="Image" >
+            <span class="text-danger error-message" id="error-Image"></span>
+        </div>
+
+        <div class="p-2">
+            <input type="file" id="Image5" name="Image5" class="form-control text-center" placeholder="Image" >
+            <span class="text-danger error-message" id="error-Image"></span>
+        </div>
+
     </div>
     <button type="submit" class="btn btn-primary w-25 mx-auto">Ajouter</button>
 </form>
