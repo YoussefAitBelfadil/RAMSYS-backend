@@ -8,6 +8,13 @@ use Illuminate\Database\QueryException;
 
 class PrinterController extends Controller
 {
+    public function product()
+    {
+        return response()->json(Printer::limit(10)->get());
+    }
+
+
+
     public function index()
     {
         $laptops = Printer::all();

@@ -49,3 +49,4 @@ Route::get('/per/{type}', function ($type) {
 Route::get('/forms/{type}', [FormController::class, 'getForm']);
 
 
+

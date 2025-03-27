@@ -10,6 +10,12 @@ use Illuminate\Database\QueryException;
 
 class KeyboardController extends Controller
 {
+
+    public function product()
+    {
+        return response()->json(Keyboard::limit(10)->get()); // Fetch only 10 products
+    }
+
     public function index()
     {
         $laptops = Keyboard::all();

@@ -8,6 +8,11 @@ use Illuminate\Database\QueryException;
 
 class LaptopController extends Controller
 {
+    public function product()
+    {
+        return response()->json(Laptop::all());
+    }
+
     public function index()
     {
         $laptops = Laptop::all();

@@ -17,7 +17,7 @@
         <div class="p-2">
             <select required class="form-select text-center" name='Liaison'>
                 <option value="" disabled selected hidden>Liaison</option>
-                <option value="Avec fil">Avec fil</option>
+                <option value="Avec_fil">Avec fil</option>
                 <option value="Sans_fil">Sans fil - USB</option>
             </select>
         </div>

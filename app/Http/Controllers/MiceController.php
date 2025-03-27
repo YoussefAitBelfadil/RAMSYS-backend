@@ -7,6 +7,12 @@ use Illuminate\Database\QueryException;
 
 class MiceController extends Controller
 {
+
+    public function product()
+    {
+        return response()->json(Mouse::limit(10)->get()); // Fetch only 10 products
+    }
+
     public function index()
     {
         $laptops = Mouse::all();
@@ -96,13 +102,16 @@ foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
         $validatedData = $request->validate([
             'type'=> 'required|string|max:255',
             'name'=> 'required|string|max:255',
-            'Sous-catégories'=>  'required|in:PC_portable,PC_portable,PC_de_bureau',
             'Marque'=> 'required|string|max:100',
             'Liaison'=> 'required|in:Avec_fil,Sans_fil',
             'Prix'=> 'required|numeric',
             'Quantité_en_stock'=> 'required|integer|min:1',
             'Description'=> 'required|string|min:25',
             'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image2'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image3'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image4'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image5'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
         if ($request->hasFile('Image')) {

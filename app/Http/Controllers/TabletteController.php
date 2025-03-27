@@ -7,6 +7,12 @@ use Illuminate\Database\QueryException;
 
 class TabletteController extends Controller
 {
+
+    public function product()
+    {
+        return response()->json(Tablette::limit(10)->get()); // Fetch only 10 products
+    }
+
     public function index()
     {
         $laptops = Tablette::all();

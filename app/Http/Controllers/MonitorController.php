@@ -7,6 +7,12 @@ use Illuminate\Database\QueryException;
 
 class MonitorController extends Controller
 {
+
+    public function product()
+    {
+        return response()->json(data: Monitor::limit(10)->get()); // Fetch only 10 products
+    }
+
     public function index()
     {
         $laptops = Monitor::all();

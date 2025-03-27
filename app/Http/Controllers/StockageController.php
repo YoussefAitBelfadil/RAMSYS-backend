@@ -7,6 +7,11 @@ use Illuminate\Database\QueryException;
 
 class StockageController extends Controller
 {
+    public function product()
+    {
+        return response()->json(data: Stockage::limit(10)->get()); // Fetch only 10 products
+    }
+
     public function index()
     {
         $stockages = Stockage::all();
