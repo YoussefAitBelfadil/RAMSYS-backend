@@ -26,6 +26,8 @@ Route::get('/products/TABLETTE_GRAPHIQUE', [TabletteController::class, 'product'
 Route::get('/products/ECRAN', [MonitorController::class, 'product']);
 Route::get('/products/CLAVIER', [KeyboardController::class, 'product']);
 Route::get('/products/SOURIS', [MiceController::class, 'product']);
-Route::get('/products/Stockage', [StockageController::class, 'product']);
+Route::get('/products/stockage', [StockageController::class, 'product']);
 Route::get('/products/IMPRIMANTE', [PrinterController::class, 'product']);
+
+
 

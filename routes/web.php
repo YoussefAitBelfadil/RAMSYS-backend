@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CloudinaryTestController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\KeyboardController;
 use App\Http\Controllers\LaptopController;
@@ -15,9 +16,13 @@ use Illuminate\Support\Facades\View;
 Route::get('/', function () {
     return view('profil');})->name('profile');
 
+
+
 Route::post('/profile/laptop',[LaptopController::class, 'store'])->name('laptops.store');
 
-Route::post('/profile/imprimanter',[PrinterController::class , 'store'])->name('imprimante.store');
+Route::post('/profile/imprimante',[PrinterController::class , 'store'])->name('imprimante.store');
+//
+Route::post('/profile/imprimante',[PrinterController::class , 'index'])->name('imprimante.index');
 
 Route::post('/profile/tablette',[TabletteController::class, 'store'])->name('tablette.store');
 
@@ -31,7 +36,7 @@ Route::post('/profile/clavier',[KeyboardController::class, 'store'])->name('clav
 
 
 
-
+//
 Route::get('/form/{type}', function ($type) {
     if (View::exists("components.forms.form" . $type)) {
         return view("components.forms.form" . $type);
@@ -47,6 +52,5 @@ Route::get('/per/{type}', function ($type) {
 });
 
 Route::get('/forms/{type}', [FormController::class, 'getForm']);
-
 
 

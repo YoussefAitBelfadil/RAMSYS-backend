@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Printer;
+use Cloudinary\Cloudinary;
 use Exception;
 use Illuminate\Database\QueryException;
 
@@ -54,8 +55,7 @@ class PrinterController extends Controller
         ]);
 
         $imageUrls = [];
-
-foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
+    foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
     $imageUrl = null;
     if ($request->hasFile($imageField)) {
         $image = $request->file($imageField);
@@ -66,35 +66,7 @@ foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
     $imageUrls[$imageField] = $imageUrl;
 }
 
-        $Printer = Printer::create([
-            'type'=> $request->input('type'),
-            'name'=> $request->input('name'),
-            'Marque'=> $request->input('Marque'),
-            'Fonctions'=> $request->input('Fonctions'),
-            'Cartouches_impression'=> $request->input('Cartouches_impression'),
-            'Vitesse_impression_noir'=> $request->input('Vitesse_impression_noir'),
-            'Vitesse_impression_couleur'=> $request->input('Vitesse_impression_couleur'),
-            'Qualité_impression_noire'=> $request->input('Qualité_impression_noire'),
-            'Qualité_impression_couleur'=> $request->input('Qualité_impression_couleur'),
-            'Écran'=> $request->input('Écran'),
-            'Connectivité'=> $request->input('Connectivité'),
-            'Impression_recto/verso'=> $request->input('Impression_recto/verso'),
-            'Capacité_bac_papier'=> $request->input('Capacité_bac_papier'),
-            'Dimensions'=> $request->input('Dimensions'),
-            'Poids'=> $request->input('Poids'),
-            'Photocopieur'=>  $request->input('Photocopieur'),
-            'Câble_fourni'=>  $request->input('Câble_fourni'),
-            'Prix'=> $request->input('Prix'),
-            'Quantité_en_stock'=> $request->input('Quantité_en_stock'),
-            'Description'=> $request->input('Description'),
-            'Image'=> $imageUrls['Image'],
-            'Image2'=> $imageUrls['Image2'],
-            'Image3'=> $imageUrls['Image3'],
-            'Image4'=> $imageUrls['Image4'],
-            'Image5'=> $imageUrls['Image5'],
-        ]);
 
-        return redirect()->back()->with('success', 'Le produit a été ajouté avec succès.');
 
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
