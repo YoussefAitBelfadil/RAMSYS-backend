@@ -10,7 +10,25 @@ use Illuminate\Support\Facades\Storage;
 
 class LaptopController extends Controller
 {
-    // ... (keep your existing product(), index(), show() methods)
+
+    public function show($id)
+    {
+        try {
+            $laptop = Laptop::with(['brand', 'specifications'])
+                ->findOrFail($id);
+
+            return response()->json([
+                'success' => true,
+                'data' => $this->transformLaptop($laptop)
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Laptop not found'
+            ], 404);
+        }
+    }
 
     public function store(Request $request)
     {

@@ -8,6 +8,25 @@ use Illuminate\Database\QueryException;
 class MonitorController extends Controller
 {
 
+    public function show($id)
+    {
+        try {
+            $laptop = Monitor::with(['brand', 'specifications'])
+                ->findOrFail($id);
+
+            return response()->json([
+                'success' => true,
+                'data' => $this->transformLaptop($laptop)
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Laptop not found'
+            ], 404);
+        }
+    }
+
     public function product()
     {
         return response()->json(data: Monitor::limit(10)->get()); // Fetch only 10 products
@@ -107,11 +126,7 @@ foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
 }
 
 
-    public function show(string $id)
-    {
-        $monitor = Monitor::findOrFail($id);
-        return response()->json($monitor);
-    }
+
 
     public function update(Request $request, string $id)
     {

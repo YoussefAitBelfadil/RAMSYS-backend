@@ -11,6 +11,24 @@ use Illuminate\Database\QueryException;
 class KeyboardController extends Controller
 {
 
+    public function show($id)
+    {
+        try {
+            $laptop = Keyboard::with(['brand', 'specifications'])
+                ->findOrFail($id);
+
+            return response()->json([
+                'success' => true,
+                'data' => $this->transformLaptop($laptop)
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Laptop not found'
+            ], 404);
+        }
+    }
     public function product()
     {
         return response()->json(Keyboard::limit(10)->get()); // Fetch only 10 products
@@ -100,11 +118,7 @@ foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
 }
 
 
-    public function show(string $id)
-    {
-        $keyboard = Keyboard::findOrFail($id);
-        return response()->json($keyboard);
-    }
+    
 
     public function update(Request $request, string $id)
     {

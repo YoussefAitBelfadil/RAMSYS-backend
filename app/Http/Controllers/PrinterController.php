@@ -9,6 +9,26 @@ use Illuminate\Database\QueryException;
 
 class PrinterController extends Controller
 {
+
+    public function show($id)
+    {
+        try {
+            $laptop = Printer::with(['brand', 'specifications'])
+                ->findOrFail($id);
+
+            return response()->json([
+                'success' => true,
+                'data' => $this->transformLaptop($laptop)
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Laptop not found'
+            ], 404);
+        }
+    }
+
     public function product()
     {
         return response()->json(Printer::limit(10)->get());
@@ -89,11 +109,7 @@ class PrinterController extends Controller
 }
 
 
-    public function show(string $id)
-    {
-        $printer = Printer::findOrFail($id);
-        return response()->json($printer);
-    }
+
 
     public function update(Request $request, string $id)
     {
