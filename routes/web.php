@@ -25,8 +25,6 @@ Route::get('/', function () {
 Route::post('/profile/laptop',[LaptopController::class, 'store'])->name('laptops.store');
 
 Route::post('/profile/imprimante',[PrinterController::class , 'store'])->name('imprimante.store');
-//
-Route::post('/profile/imprimante',[PrinterController::class , 'index'])->name('imprimante.index');
 
 Route::post('/profile/tablette',[TabletteController::class, 'store'])->name('tablette.store');
 

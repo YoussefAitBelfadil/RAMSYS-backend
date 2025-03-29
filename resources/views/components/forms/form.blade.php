@@ -19,7 +19,6 @@
 
 <style>
     body, html {
-    height: 100vh;
     margin: 0;
     display: flex;
     flex-direction: column;
