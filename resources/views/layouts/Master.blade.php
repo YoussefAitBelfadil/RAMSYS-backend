@@ -16,5 +16,14 @@
     </main>
 
     @include('parts.footer')
+
+    @auth
+<li class="nav-item">
+        <a class="nav-link" href="{{ route('cart.index') }}">Cart</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('orders.index') }}">My Orders</a>
+    </li>
+@endauth
 </body>
 </html>
