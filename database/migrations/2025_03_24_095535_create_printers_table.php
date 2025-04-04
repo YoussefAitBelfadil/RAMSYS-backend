@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('Qualité_impression_couleur');
             $table->string('Écran');
             $table->string('Connectivité');
-            $table->string('Impression_recto/verso');
+            $table->string('Impression_recto_verso');
             $table->string('Capacité_bac_papier');
             $table->string('Dimensions');
             $table->integer('Poids');

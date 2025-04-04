@@ -16,7 +16,7 @@ class Printer extends Model
             'Qualité_impression_couleur',
             'Écran',
             'Connectivité',
-            'Impression_recto/verso',
+            'Impression_recto_verso',
             'Capacité_bac_papier',
             'Dimensions',
             'Poids',
@@ -31,4 +31,5 @@ class Printer extends Model
             'Image4',
             'Image5',
         ];
+
 }

@@ -29,4 +29,5 @@ class Laptop extends Model
                             'Image5',
                             ];
 
+
 }

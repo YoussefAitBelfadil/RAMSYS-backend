@@ -2,39 +2,49 @@
 @extends('layouts.app')
 
 @if (session('success'))
-    <!-- Modal Bootstrap -->
-    <div class="modal fade show" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" style="display: block;">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Succès</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{ session('success') }}
-                </div>
+<!-- Modal HTML Structure -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Succès</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ session('success') }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
+</div>
 
-    @if (session('success'))
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(function() {
-                var successModal = new bootstrap.Modal(document.getElementById("successModal"));
-                successModal.show();
-            }, 500); // Délai pour éviter un affichage immédiat
-        });
-    </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Initialize the modal properly
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+
+        // Show the modal
+        successModal.show();
+
+        // Auto-hide after 5 seconds (optional)
+        setTimeout(function() {
+            successModal.hide();
+        }, 2000);
+    });
+</script>
 @endif
 
 @if ($errors->any())
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            alert("Erreur de validation : vérifiez vos champs !");
-        });
-    </script>
-@endif
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <ul class="mb-0">
+        @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 @endif
 
 

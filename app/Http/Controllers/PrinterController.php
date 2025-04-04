@@ -24,7 +24,7 @@ class PrinterController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Laptop not found'
+                'message' => 'Printer not found'
             ], 404);
         }
     }
@@ -58,7 +58,7 @@ class PrinterController extends Controller
             'Qualité_impression_couleur'=> 'required|string|max:255',
             'Écran'=> 'required|string|max:255',
             'Connectivité'=> 'required|string|max:255',
-            'Impression_recto/verso'=> 'required|string|max:255',
+            'Impression_recto_verso'=> 'required|string|max:255',
             'Capacité_bac_papier'=> 'required|string|max:255',
             'Dimensions'=> 'required|string|max:255',
             'Poids'=> 'required|integer|min:1',
@@ -67,7 +67,7 @@ class PrinterController extends Controller
             'Prix'=> 'required|numeric',
             'Quantité_en_stock'=> 'required|integer|min:1',
             'Description'=> 'required|string|min:25',
-            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:10240',
             'Image2'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
             'Image3'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
             'Image4'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
@@ -86,7 +86,10 @@ class PrinterController extends Controller
     $imageUrls[$imageField] = $imageUrl;
 }
 
+        $printerData = array_merge($validatedData, $imageUrls);
+        $printer = Printer::create($printerData);
 
+        return redirect()->back()->with('success', 'L\'imprimante a été ajouté avec succès.');
 
     } catch (\Illuminate\Validation\ValidationException $e) {
         return response()->json([
@@ -127,7 +130,7 @@ class PrinterController extends Controller
             'Qualité_impression_couleur'=> 'required|string|max:255',
             'Écran'=> 'required|string|max:255',
             'Connectivité'=> 'required|string|max:255',
-            'Impression_recto/verso'=> 'required|string|max:255',
+            'Impression_recto_verso'=> 'required|string|max:255',
             'Capacité_bac_papier'=> 'required|string|max:255',
             'Dimensions'=> 'required|string|max:255',
             'Poids'=> 'required|integer|min:1',
@@ -136,7 +139,11 @@ class PrinterController extends Controller
             'Prix'=> 'required|numeric',
             'Quantité_en_stock'=> 'required|integer|min:1',
             'Description'=> 'required|string|min:25',
-            'Image'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image'=> 'required|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image2'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image3'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image4'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
+            'Image5'=> 'nullable|image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
 
         if ($request->hasFile('Image')) {

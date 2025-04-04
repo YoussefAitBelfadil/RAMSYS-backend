@@ -29,7 +29,7 @@ class StockageController extends Controller
 
     public function product()
     {
-        return response()->json(data: Stockage::limit(10)->get()); // Fetch only 10 products
+        return response()->json(data: Stockage::limit(10)->get());
     }
 
     public function index()
@@ -72,7 +72,7 @@ foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
 
         Stockage::create([
             'type'=> $request->input('type'),
-            'Sous-catégories'=>  $request->input('Sous-catégories'),
+            'SousCatégories'=>  $request->input('Sous-catégories'),
             'name' => $request->input('name'),
             'Marque'=> $request->input('Marque'),
             'Prix'=> $request->input('Prix'),
@@ -109,7 +109,7 @@ foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
 }
 
 
-    
+
 
     public function update(Request $request, string $id)
     {
@@ -117,7 +117,7 @@ foreach (['Image', 'Image2', 'Image3', 'Image4','Image5'] as $imageField) {
 
         $validatedData = $request->validate([
             'type'=> 'required|string|max:255',
-            'Sous-catégories'=>  'required|in:Disque_dur_portable,Disque_dur_interne,Clé_USB,Carte_mémoire',
+            'SousCatégories'=>  'required|in:Disque_dur_portable,Disque_dur_interne,Clé_USB,Carte_mémoire',
             'name' => 'required|string|max:255',
             'Marque'=> 'required|string|max:255',
             'Prix'=> 'required|numeric',

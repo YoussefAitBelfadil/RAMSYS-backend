@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" id="registerForm">
                         @csrf
 
                         <div class="row mb-3">
@@ -65,7 +65,7 @@
                                 <select id="role" class="form-control @error('role') is-invalid @enderror" name="role" required autocomplete="role">
                                     <option value="" disabled {{ old('role') ? '' : 'selected' }}>Select a role</option>
                                     <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                    <option value="client" {{ old('role') == 'client' ? 'selected' : '' }}>Client </option>
+                                    <option value="client" {{ old('role') == 'client' ? 'selected' : '' }}>Client</option>
                                 </select>
                                 @error('role')
                                     <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Mot de pass') }}</label>
                             <div class="col-md-6">
-                                <input id="adress" type="text" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="family-name">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -107,4 +107,25 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const registerForm = document.getElementById('registerForm');
+    const roleSelect = document.getElementById('role');
+    const ADMIN_PASSWORD = "12345";
+
+    registerForm.addEventListener('submit', function(e) {
+        if (roleSelect.value === 'admin') {
+            e.preventDefault();
+
+            const enteredPassword = prompt('Entrer le mot de pass :');
+            if (enteredPassword === ADMIN_PASSWORD) {
+                registerForm.submit();
+            } else {
+                alert('Le mot de passe incorrect , réessayez');
+            }
+        }
+    });
+});
+</script>
 @endsection

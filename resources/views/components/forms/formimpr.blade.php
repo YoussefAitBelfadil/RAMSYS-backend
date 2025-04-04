@@ -47,7 +47,7 @@
             </div>
 
             <div class="col-md-4">
-                <input type="text" class="form-control text-center" name='Impression_recto/verso' placeholder="Impression recto/verso" required>
+                <input type="text" class="form-control text-center" name='Impression_recto_verso' placeholder="Impression recto/verso" required>
             </div>
 
             <div class="col-md-4">
@@ -95,12 +95,12 @@
             </div>
 
             <div class="col-md-4">
-                <input type="file" id="Image2" name="Image2" class="form-control text-center" placeholder="Image" required>
+                <input type="file" id="Image2" name="Image2" class="form-control text-center" placeholder="Image" >
                 <span class="text-danger error-message" id="error-Image"></span>
             </div>
 
             <div class="col-md-4">
-                <input type="file" id="Image3" name="Image3" class="form-control text-center" placeholder="Image" required>
+                <input type="file" id="Image3" name="Image3" class="form-control text-center" placeholder="Image" >
                 <span class="text-danger error-message" id="error-Image"></span>
             </div>
 
@@ -117,6 +117,7 @@
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Soumettre</button>
             </div>
+
         </div>
     </form>
 </div>
